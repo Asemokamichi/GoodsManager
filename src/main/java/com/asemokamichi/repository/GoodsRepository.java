@@ -3,7 +3,6 @@ package com.asemokamichi.repository;
 import com.asemokamichi.config.DatabaseConfig;
 import com.asemokamichi.entity.Product;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class GoodsRepository {
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setId(resultSet.getLong("id"));
-                product.setName(resultSet.getString("name"));
+                product.setName(resultSet.getString("product_name"));
                 product.setPrice(resultSet.getLong("price"));
                 products.add(product);
             }
