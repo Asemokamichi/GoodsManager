@@ -8,5 +8,7 @@ public interface GoodsRepository {
 
     List<Product> findAll();
 
+    Product findById(Long id);
+
     void save(Product product);
 }

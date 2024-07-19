@@ -22,6 +22,13 @@ public class GoodsController {
     }
 
     @POST
+    @Path("/get/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProduct(@PathParam("id") Long id ) {
+        return Response.ok(goodsService.findById(id)).build();
+    }
+
+    @POST
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response save(Product product) {

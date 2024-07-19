@@ -35,6 +35,34 @@ public class GoodsRepositoryImpl implements GoodsRepository {
         return products;
     }
 
+    public Product findById(Long id) {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE id = ?";
+
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setLong(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = new Product();
+                    product.setId(resultSet.getLong("id"));
+                    product.setName(resultSet.getString("name"));
+                    product.setPrice(resultSet.getLong("price"));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding product by id", e);
+        }
+
+        if (product == null){
+            throw new RuntimeException("the product was not found for this id");
+        }
+
+        return product;
+    }
+
     public void save(Product product) {
         String query = "INSERT INTO products (name, price) VALUES (?, ?)";
 

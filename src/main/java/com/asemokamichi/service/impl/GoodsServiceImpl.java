@@ -17,6 +17,10 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Transactional
+    public Product findById(Long id) {
+        return goodsRepository.findById(id);
+    }
+    @Transactional
     public void save(Product product) {
         if (product.getName().isEmpty() || product.getPrice()==0)
             throw new RuntimeException("The request text is incorrect. Please provide a valid product name or price.");
