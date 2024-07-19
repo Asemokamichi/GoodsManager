@@ -2,17 +2,17 @@ package com.asemokamichi.controller;
 
 import com.asemokamichi.entity.Product;
 import com.asemokamichi.service.GoodsService;
+import com.asemokamichi.service.impl.GoodsServiceImpl;
 
-import javax.inject.Inject;
+import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@ApplicationScoped
 @Path("/goods")
 public class GoodsController {
-
-    @Inject
-    private GoodsService goodsService;
+    private final GoodsService goodsService = new GoodsServiceImpl();
 
     @GET
     @Path("/get")
